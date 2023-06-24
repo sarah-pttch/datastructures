@@ -11,10 +11,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // indexoutofboundsexception
-    // methodargumenttypemismatchexception
-    // MissingServletRequestParameterException
-
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String>
