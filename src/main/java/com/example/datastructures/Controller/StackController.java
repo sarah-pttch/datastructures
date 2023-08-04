@@ -1,31 +1,32 @@
 package com.example.datastructures.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/stack")
 public class StackController {
 
-    ArrayList<Integer> stack = new ArrayList<>();
+    @Autowired
+    StackService stackService;
 
-    @GetMapping("/stack/push")
+    @GetMapping("/push")
     public String push(@RequestParam Integer number){
-        stack.add(number);
+        stackService.push(number);
         return "You added the number " + number + " to the stack";
     }
 
-    @GetMapping("/stack/remove")
+    @GetMapping("/remove")
     public String remove(){
-        Integer number = stack.get(stack.size() - 1);
-        stack.remove(stack.size()-1);
-        return "You removed the number " + number + " from the stack";
+        return "You removed the number " + stackService.remove() + " from the stack";
     }
 
-    @GetMapping("/stack/peek")
+    @GetMapping("/peek")
     public String peek(){
-        return "The number on top of the stack is " + stack.get(stack.size()-1);
+        return "The number on top of the stack is " + stackService.peek();
     }
 
 }
