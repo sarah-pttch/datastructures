@@ -16,7 +16,7 @@ public class StackService {
 
     public Integer remove() throws IndexOutOfBoundsException {
         if(i == 0){
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("List empty");
         }
         i--;
         return stack[i];

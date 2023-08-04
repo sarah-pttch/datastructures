@@ -22,7 +22,7 @@ public class QueueService {
 
     public Integer peek() throws IndexOutOfBoundsException {
         if(i == 0){
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("List empty");
         }
         return queue[0];
     }

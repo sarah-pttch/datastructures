@@ -14,7 +14,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String>
-    handleIndexOutOfBoundsException(){
+    handleIndexOutOfBoundsException(IndexOutOfBoundsException e){
+        if(e.getMessage().equals("Index 10 out of bounds for length 10")){
+            return new ResponseEntity<>("The list is full.", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>("There are no elements in the list. Add elements first.", HttpStatus.BAD_REQUEST);
     }
 
