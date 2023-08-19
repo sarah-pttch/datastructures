@@ -1,4 +1,4 @@
-package com.example.datastructures.Controller;
+package com.example.datastructures.Service;
 
 import org.springframework.stereotype.Service;
 
@@ -9,20 +9,30 @@ public class QueueService {
     static int i = 0;
 
     public void push(int number){
-        queue[i] = number;
+        try {
+            queue[i] = number;
+        }
+        catch(IndexOutOfBoundsException e){
+            throw new ListFullException();
+        }
         i++;
     }
 
     public Integer remove(){
         Integer number = queue[0];
-        System.arraycopy(queue, 1, queue, 0, i-1);
+        try {
+            System.arraycopy(queue, 1, queue, 0, i - 1);
+        }
+        catch(IndexOutOfBoundsException e){
+            throw new ListEmptyException();
+        }
         i--;
         return number;
     }
 
     public Integer peek() throws IndexOutOfBoundsException {
         if(i == 0){
-            throw new IndexOutOfBoundsException("List empty");
+            throw new ListEmptyException();
         }
         return queue[0];
     }
