@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StackService {
 
-    static int[] stack = new int[10];
-    static int i = 0;
+    int[] stack = new int[10];
+    int i = 0;
 
     public void push(int number){
         try {
@@ -18,7 +18,7 @@ public class StackService {
         i++;
     }
 
-    public Integer remove() throws IndexOutOfBoundsException {
+    public Integer remove() {
         if(i == 0){
             throw new ListEmptyException();
         }
@@ -33,5 +33,13 @@ public class StackService {
         catch(IndexOutOfBoundsException e){
             throw new ListEmptyException();
         }
+    }
+
+    public int getI(){
+        return i;
+    }
+
+    public int getStackValue(int x){
+        return stack[x];
     }
 }

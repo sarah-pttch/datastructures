@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class QueueService {
 
-    static int[] queue = new int[10];
-    static int i = 0;
+    int[] queue = new int[10];
+    int i = 0;
 
     public void push(int number){
         try {
@@ -35,5 +35,13 @@ public class QueueService {
             throw new ListEmptyException();
         }
         return queue[0];
+    }
+
+    public int getI(){
+        return i;
+    }
+
+    public int getQueueValue(int x){
+        return queue[x];
     }
 }
