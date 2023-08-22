@@ -12,7 +12,7 @@ class StackServiceTest {
         StackService stackService = new StackService();
         stackService.push(2);
         assertEquals(1, stackService.getI());
-        assertEquals(2, stackService.getStackValue(0));
+        assertEquals(2, stackService.getStackValueByIndex(0));
     }
 
     @Test
@@ -34,19 +34,19 @@ class StackServiceTest {
     }
 
     @Test
-    public void testStackPeekFails(){
+    public void testStackPeekFails_listEmpty(){
         StackService stackService = new StackService();
         assertThrows(ListEmptyException.class, ()->stackService.peek());
     }
 
     @Test
-    public void testStackRemoveFails(){
+    public void testStackRemoveFails_listEmpty(){
         StackService stackService = new StackService();
         assertThrows(ListEmptyException.class, ()->stackService.remove());
     }
 
     @Test
-    public void testQueuePushFails(){
+    public void testQueuePushFails_listFull(){
         StackService stackService = new StackService();
         stackService.push(1);
         stackService.push(2);

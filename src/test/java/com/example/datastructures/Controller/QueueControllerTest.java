@@ -32,17 +32,53 @@ class QueueControllerTest {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    public void testQueuePushCorrect(){
-//        QueueController queueController = new QueueController();
-//        assertEquals("You added the number 7 to the queue", queueController.push(7));
-//    }
-//
-//    @Test
-//    public void testQueueRemoveCorrect(){
-//        QueueController queueController = new QueueController();
-//        queueController.push(12);
-//        assertEquals("You removed the number 12 from the queue", queueController.remove());
-//    }
+    @Test
+    public void queuePush_whenCalledWithInvalidParam_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/queue/push?number=2,4")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    //Test fails
+    @Test
+    public void queuePeek_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                MockMvcRequestBuilders.get("/queue/peek")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    //Test fails
+    @Test
+    public void queueRemove_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/queue/remove")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void queueRemove_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
+        queueService.push(12);
+        mvc.perform(
+                MockMvcRequestBuilders.get("/queue/remove")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void queuePeek_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
+        queueService.push(12);
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/queue/peek")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 
 }

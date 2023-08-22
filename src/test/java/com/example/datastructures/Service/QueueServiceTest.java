@@ -12,7 +12,7 @@ class QueueServiceTest {
         QueueService queueService = new QueueService();
         queueService.push(2);
         assertEquals(1, queueService.getI());
-        assertEquals(2, queueService.getQueueValue(0));
+        assertEquals(2, queueService.getQueueValueByIndex(0));
     }
 
     @Test
@@ -23,7 +23,7 @@ class QueueServiceTest {
         int value = queueService.remove();
         assertEquals(7, value);
         assertEquals(1, queueService.getI());
-        assertEquals(6, queueService.getQueueValue(0));
+        assertEquals(6, queueService.getQueueValueByIndex(0));
     }
 
     @Test
@@ -35,19 +35,19 @@ class QueueServiceTest {
     }
 
     @Test
-    public void testQueuePeekFails(){
+    public void testQueuePeekFails_listEmpty(){
         QueueService queueService = new QueueService();
         assertThrows(ListEmptyException.class, ()->queueService.peek());
     }
 
     @Test
-    public void testQueueRemoveFails(){
+    public void testQueueRemoveFails_listEmpty(){
         QueueService queueService = new QueueService();
         assertThrows(ListEmptyException.class, ()->queueService.remove());
     }
 
     @Test
-    public void testQueuePushFails(){
+    public void testQueuePushFails_listFull(){
         QueueService queueService = new QueueService();
         queueService.push(1);
         queueService.push(2);

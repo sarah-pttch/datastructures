@@ -41,7 +41,7 @@ public class QueueService {
         return i;
     }
 
-    public int getQueueValue(int x){
+    public int getQueueValueByIndex(int x){
         return queue[x];
     }
 }

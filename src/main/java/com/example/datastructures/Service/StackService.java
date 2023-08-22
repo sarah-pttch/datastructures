@@ -39,7 +39,7 @@ public class StackService {
         return i;
     }
 
-    public int getStackValue(int x){
+    public int getStackValueByIndex(int x){
         return stack[x];
     }
 }

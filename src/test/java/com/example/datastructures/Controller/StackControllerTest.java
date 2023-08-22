@@ -31,25 +31,53 @@ class StackControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void stackPush_whenCalledWithInvalidParam_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/stack/push?number=2,4")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 
+    //Test fails
+    @Test
+    public void stackPeek_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/stack/peek")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 
-//    @Test
-//    public void testStackPushCorrect(){
-//        StackController stackController = new StackController();
-//        assertEquals("You added the number 7 to the stack", stackController.push(7));
-//    }
-//
-//    @Test
-//    public void testStackPeekCorrect(){
-//        StackController stackController = new StackController();
-//        stackController.push(12);
-//        assertEquals("The number on top of the stack is 12", stackController.peek());
-//    }
+    //Test fails
+    @Test
+    public void stackRemove_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/stack/remove")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 
-//    @Test
-//    public void testStackIndexOutOfBounds(){
-//        StackController stackController = new StackController();
-//        assertThrows(IndexOutOfBoundsException.class, stackController::peek);
-//    }
+    @Test
+    public void stackRemove_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
+        stackService.push(12);
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/stack/remove")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void stackPeek_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
+        stackService.push(12);
+        mvc.perform(
+                        MockMvcRequestBuilders.get("/stack/peek")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 
 }
