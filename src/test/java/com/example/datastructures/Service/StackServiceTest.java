@@ -11,7 +11,7 @@ class StackServiceTest {
     public void testStackPushCorrect(){
         StackService stackService = new StackService();
         stackService.push(2);
-        assertEquals(1, stackService.getI());
+        assertEquals(0, stackService.getI());
         assertEquals(2, stackService.getStackValueByIndex(0));
     }
 
@@ -22,7 +22,7 @@ class StackServiceTest {
         stackService.push(7);
         int value = stackService.remove();
         assertEquals(7, value);
-        assertEquals(1, stackService.getI());
+        assertEquals(0, stackService.getI());
     }
 
     @Test

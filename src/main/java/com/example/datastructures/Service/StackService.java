@@ -6,29 +6,27 @@ import org.springframework.stereotype.Service;
 public class StackService {
 
     int[] stack = new int[10];
-    int i = 0;
+    int i = -1;
 
     public void push(int number){
-        try {
-            stack[i] = number;
-        }
-        catch(IndexOutOfBoundsException e) {
+        if(i == 9) {
             throw new ListFullException();
         }
         i++;
+        stack[i] = number;
     }
 
     public Integer remove() {
-        if(i == 0){
+        if(i == -1){
             throw new ListEmptyException();
         }
         i--;
-        return stack[i];
+        return stack[i+1];
     }
 
     public Integer peek(){
         try {
-            return stack[i - 1];
+            return stack[i];
         }
         catch(IndexOutOfBoundsException e){
             throw new ListEmptyException();

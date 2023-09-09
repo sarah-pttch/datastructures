@@ -11,7 +11,7 @@ class QueueServiceTest {
     public void testQueuePushCorrect(){
         QueueService queueService = new QueueService();
         queueService.push(2);
-        assertEquals(1, queueService.getI());
+        assertEquals(0, queueService.getI());
         assertEquals(2, queueService.getQueueValueByIndex(0));
     }
 
@@ -22,7 +22,7 @@ class QueueServiceTest {
         queueService.push(6);
         int value = queueService.remove();
         assertEquals(7, value);
-        assertEquals(1, queueService.getI());
+        assertEquals(0, queueService.getI());
         assertEquals(6, queueService.getQueueValueByIndex(0));
     }
 
