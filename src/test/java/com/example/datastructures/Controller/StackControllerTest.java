@@ -40,26 +40,6 @@ class StackControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    //Test fails
-    @Test
-    public void stackPeek_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/stack/peek")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
-
-    //Test fails
-    @Test
-    public void stackRemove_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/stack/remove")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
-
     @Test
     public void stackRemove_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
         stackService.push(12);

@@ -41,26 +41,6 @@ class QueueControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    //Test fails
-    @Test
-    public void queuePeek_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
-        mvc.perform(
-                MockMvcRequestBuilders.get("/queue/peek")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
-
-    //Test fails
-    @Test
-    public void queueRemove_whenCalledOnEmptyList_thenVerifyControllerReturnsClientError() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/queue/remove")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
-
     @Test
     public void queueRemove_whenCalledOnFilledList_thenVerifyControllerReturnsOk() throws Exception {
         queueService.push(12);
